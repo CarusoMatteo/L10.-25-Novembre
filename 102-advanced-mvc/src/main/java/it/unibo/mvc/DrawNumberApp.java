@@ -1,5 +1,7 @@
 package it.unibo.mvc;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
 import java.io.FileNotFoundException;
 import java.util.Arrays;
 import java.util.List;
@@ -7,9 +9,11 @@ import java.util.List;
 /**
  */
 public final class DrawNumberApp implements DrawNumberViewObserver {
-    private static final int MIN = 0;
-    private static final int MAX = 100;
-    private static final int ATTEMPTS = 10;
+    private static final String SETTINGS_FILE_PATH = "src/main/resources/config.yml";
+
+    private static final int DEFAULT_MIN = 0;
+    private static final int DEFAULT_MAX = 100;
+    private static final int DEFAULT_ATTEMPTS = 10;
 
     private final DrawNumber model;
     private final List<DrawNumberView> views;
@@ -26,7 +30,21 @@ public final class DrawNumberApp implements DrawNumberViewObserver {
             view.setObserver(this);
             view.start();
         }
-        this.model = new DrawNumberImpl(MIN, MAX, ATTEMPTS);
+
+        int min = DEFAULT_MIN;
+        int max = DEFAULT_MAX;
+        int attempts = DEFAULT_ATTEMPTS;
+        try (final BufferedReader file = new BufferedReader(new FileReader(SETTINGS_FILE_PATH))) {
+            min = Integer.parseInt(file.readLine().split(": ")[1]);
+            max = Integer.parseInt(file.readLine().split(": ")[1]);
+            attempts = Integer.parseInt(file.readLine().split(": ")[1]);
+            // TODO: Remove print before submitting
+            System.out.println("Correctly read from file: " + min + ", " + max + ", " + attempts);
+        } catch (final Exception e) {
+            // TODO: Remove print before submitting
+            System.err.println("Error while reading file: " + e);
+        }
+        this.model = new DrawNumberImpl(min, max, attempts);
     }
 
     @Override
@@ -36,7 +54,7 @@ public final class DrawNumberApp implements DrawNumberViewObserver {
             for (final DrawNumberView view : views) {
                 view.result(result);
             }
-        } catch (IllegalArgumentException e) {
+        } catch (final IllegalArgumentException e) {
             for (final DrawNumberView view : views) {
                 view.numberIncorrect();
             }
