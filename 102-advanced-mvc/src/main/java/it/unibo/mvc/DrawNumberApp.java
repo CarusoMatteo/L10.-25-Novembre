@@ -31,18 +31,21 @@ public final class DrawNumberApp implements DrawNumberViewObserver {
             view.start();
         }
 
-        int min = DEFAULT_MIN;
-        int max = DEFAULT_MAX;
-        int attempts = DEFAULT_ATTEMPTS;
+        int min;
+        int max;
+        int attempts;
         try (final BufferedReader file = new BufferedReader(new FileReader(SETTINGS_FILE_PATH))) {
             min = Integer.parseInt(file.readLine().split(": ")[1]);
             max = Integer.parseInt(file.readLine().split(": ")[1]);
             attempts = Integer.parseInt(file.readLine().split(": ")[1]);
-            // TODO: Remove print before submitting
-            System.out.println("Correctly read from file: " + min + ", " + max + ", " + attempts);
         } catch (final Exception e) {
-            // TODO: Remove print before submitting
-            System.err.println("Error while reading file: " + e);
+            for (final DrawNumberView view : views) {
+                view.displayError("Error while reading configuration file.");
+            }
+
+            min = DEFAULT_MIN;
+            max = DEFAULT_MAX;
+            attempts = DEFAULT_ATTEMPTS;
         }
         this.model = new DrawNumberImpl(min, max, attempts);
     }
@@ -84,5 +87,4 @@ public final class DrawNumberApp implements DrawNumberViewObserver {
     public static void main(final String... args) throws FileNotFoundException {
         new DrawNumberApp(new DrawNumberViewImpl());
     }
-
 }
