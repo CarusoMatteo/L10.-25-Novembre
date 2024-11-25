@@ -10,6 +10,7 @@ import java.util.List;
  */
 public final class DrawNumberApp implements DrawNumberViewObserver {
     private static final String SETTINGS_FILE_PATH = "src/main/resources/config.yml";
+    private static final String OUTPUT_FILE_PATH = "src/main/resources/out.txt";
 
     private static final int DEFAULT_MIN = 0;
     private static final int DEFAULT_MAX = 100;
@@ -85,6 +86,10 @@ public final class DrawNumberApp implements DrawNumberViewObserver {
      * @throws FileNotFoundException
      */
     public static void main(final String... args) throws FileNotFoundException {
-        new DrawNumberApp(new DrawNumberViewImpl());
+        new DrawNumberApp(
+                new DrawNumberViewImpl(),
+                new DrawNumberViewImpl(),
+                new PrintStreamView(System.out),
+                new PrintStreamView(OUTPUT_FILE_PATH));
     }
 }

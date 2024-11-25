@@ -7,3 +7,6 @@
 
 # Ignore VS Code folder
 **/.vscode/*
+
+# Ignore 102 generated output text file
+102-advanced-mvc/src/main/resources/out.txt
