@@ -2,12 +2,11 @@ package it.unibo.mvc;
 
 /**
  * This class models a draw number game.
- *
  */
 public interface DrawNumber {
 
     /**
-     * resets the game.
+     * Resets the game.
      */
     void reset();
 

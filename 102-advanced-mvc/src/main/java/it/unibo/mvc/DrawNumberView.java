@@ -1,7 +1,6 @@
 package it.unibo.mvc;
 
 /**
- *
  */
 public interface DrawNumberView {
 
@@ -11,7 +10,8 @@ public interface DrawNumberView {
     void setObserver(DrawNumberViewObserver observer);
 
     /**
-     * This method is called before the UI is used. It should finalize its status (if needed).
+     * This method is called before the UI is used. It should finalize its status
+     * (if needed).
      */
     void start();
 

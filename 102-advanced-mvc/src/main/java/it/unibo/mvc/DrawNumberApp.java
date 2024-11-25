@@ -15,15 +15,14 @@ public final class DrawNumberApp implements DrawNumberViewObserver {
     private final List<DrawNumberView> views;
 
     /**
-     * @param views
-     *            the views to attach
+     * @param views the views to attach
      */
     public DrawNumberApp(final DrawNumberView... views) {
         /*
          * Side-effect proof
          */
         this.views = Arrays.asList(Arrays.copyOf(views, views.length));
-        for (final DrawNumberView view: views) {
+        for (final DrawNumberView view : views) {
             view.setObserver(this);
             view.start();
         }
@@ -34,11 +33,11 @@ public final class DrawNumberApp implements DrawNumberViewObserver {
     public void newAttempt(final int n) {
         try {
             final DrawResult result = model.attempt(n);
-            for (final DrawNumberView view: views) {
+            for (final DrawNumberView view : views) {
                 view.result(result);
             }
         } catch (IllegalArgumentException e) {
-            for (final DrawNumberView view: views) {
+            for (final DrawNumberView view : views) {
                 view.numberIncorrect();
             }
         }
@@ -61,9 +60,8 @@ public final class DrawNumberApp implements DrawNumberViewObserver {
     }
 
     /**
-     * @param args
-     *            ignored
-     * @throws FileNotFoundException 
+     * @param args ignored
+     * @throws FileNotFoundException
      */
     public static void main(final String... args) throws FileNotFoundException {
         new DrawNumberApp(new DrawNumberViewImpl());

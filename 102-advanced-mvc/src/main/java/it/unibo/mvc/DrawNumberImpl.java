@@ -3,7 +3,6 @@ package it.unibo.mvc;
 import java.util.Random;
 
 /**
- *
  */
 public final class DrawNumberImpl implements DrawNumber {
 
