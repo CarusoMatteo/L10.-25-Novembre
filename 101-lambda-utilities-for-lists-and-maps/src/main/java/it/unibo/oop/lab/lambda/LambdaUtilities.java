@@ -16,11 +16,15 @@ import java.util.stream.IntStream;
 
 /**
  * This class will contain four utility functions on lists and maps, of which
- * the first one is provided as example. All such methods take as second
- * argument a functional interface from the Java library (java.util.function).
+ * the first one is provided as example.
+ * <br>
+ * All such methods take as second argument a functional interface from the Java
+ * library (java.util.function).
  * This enables calling them by using the concise lambda syntax, as it's done in
- * the main function. Realize the three methods **WITHOUT** using the Stream
- * library, but only leveraging the lambdas.
+ * the main function.
+ * <br>
+ * Realize the three methods **WITHOUT** using the Stream library, but only
+ * leveraging the lambdas.
  */
 public final class LambdaUtilities {
 
